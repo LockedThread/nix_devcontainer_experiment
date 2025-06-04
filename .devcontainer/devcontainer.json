@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
+{
+	"name": "Nix Devcontainer",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	//"image": "mcr.microsoft.com/devcontainers/base:alpine-3.20"
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"USER_UID": "${localEnv:USER_UID}",
+			"USER_GID": "${localEnv:USER_GID}",
+			"CURSOR_HASH": "96e5b01ca25f8fbd4c4c10bc69b15f6228c80770"
+		},
+	},
+	"onCreateCommand": "echo 'HOLA' && chmod +x ./overwrite-check-requirements.sh && ./overwrite-check-requirements.sh 96e5b01ca25f8fbd4c4c10bc69b15f6228c80770",
+	/*"runArgs": [
+		"--security-opt",
+		"label=disable"2
+	],
+	"containerEnv": {
+		// extensions to preload before other extensions
+		"PRELOAD_EXTENSIONS": "arrterian.nix-env-selector"
+	},*/
+	//"userEnvProbe": "loginShell",
+	//"updateRemoteUserUID": false,
+	//"onCreateCommand": "nix-shell --command 'SERVER_NODE_PATH=\"/vscode/cursor-server/bin/linux-x64/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/node\"; SERVER_NODE_DIR=$(dirname \"${SERVER_NODE_PATH}\"); mkdir -p \"${SERVER_NODE_DIR}\"; NIX_NODE_PATH=$(which node); if [ -x \"${NIX_NODE_PATH}\" ]; then echo \"Found Nix node at: ${NIX_NODE_PATH}\"; echo \"Attempting to symlink to: ${SERVER_NODE_PATH}\"; ln -sf \"${NIX_NODE_PATH}\" \"${SERVER_NODE_PATH}\" && echo \"Successfully symlinked node.\" || echo \"Failed to symlink node.\"; else echo \"Nix node not found or not executable at ${NIX_NODE_PATH}.\"; fi; echo done building nix dev environment'",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+	// Configure tool-specific properties.
+	/*"customizations": {
+		"vscode": {
+			"extensions": [
+				"arrterian.nix-env-selector"
+			],
+			"settings": {
+				"nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+				"nix.enableLanguageServer": true,
+				"runItOn": {
+					"commands": [
+						{
+							"match": "flake\\.nix",
+							"isShellCommand": false,
+							"cmd": "nixEnvSelector.hitEnv"
+						}
+					]
+				}
+			}
+		}
+	},*/
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
